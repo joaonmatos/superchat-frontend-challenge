@@ -11,10 +11,11 @@ export default function Home() {
 
   const [color, setColor] = useState("blue");
 
-  const [completed, setCompleted] = useState(false as string | boolean);
+  const [result, setResult] = useState(false as string | boolean);
 
   const onSubmit = async () => {
     setProcessing(true);
+    setResult(false);
     const post = await fetch("/api/s/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,7 +26,8 @@ export default function Home() {
       }),
     });
     if (post.status == 200) {
-      setCompleted(await post.text());
+      setProcessing(false);
+      setResult(`${window.location.origin}/s/${await post.text()}`);
     } else {
       setProcessing(false);
       alert(`Error ${post.status}: ${await post.text()}`);
@@ -50,12 +52,24 @@ export default function Home() {
           onSubmit={onSubmit}
           setColor={setColor}
         />
-        {completed ? (
+        {typeof result === "string" ? (
           <>
-            <h2>Result</h2>
-            <Link
-              href={`${window.location.origin}/s/${completed}`}
-            >{`${window.location.origin}/s/${completed}`}</Link>
+            <h2 className="text-2xl mb-3">Result</h2>
+            <Link href={result}>
+              <a
+                className={`px-4 text-center whitespace-nowrap overflow-ellipsis overflow-hidden max-w-full`}
+              >
+                {result}
+              </a>
+            </Link>
+            <button
+              className="mt-3 py-1 px-3 border-gray-600 border rounded-lg bg-white text-gray-700"
+              onClick={() => {
+                navigator.clipboard.writeText(result);
+              }}
+            >
+              Copy to Clipboard
+            </button>
           </>
         ) : (
           <> </>
@@ -76,7 +90,7 @@ function HomeForm({
 }) {
   return (
     <form
-      className="flex flex-col flex-grow "
+      className="flex flex-col mb-4"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
