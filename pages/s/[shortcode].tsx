@@ -6,6 +6,7 @@ import { getRepoInformation } from "../../util/repo";
 import bg from "../../styles/Background.module.css";
 import { db } from "../../util/db";
 import ErrorPage from "next/error";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let { shortcode } = context.query;
@@ -53,6 +54,11 @@ export default function RepoPage({ repository, color, err }: RepoPageProps) {
 
   return (
     <div className={bg["bg-layout"] + " " + bg["bg-" + color]}>
+      <Head>
+        <title>
+          {owner.id}/{name} / Cardy GH
+        </title>
+      </Head>
       <GitHubCard
         repository={{
           ...repository,
