@@ -1,0 +1,12 @@
+.card {
+  max-height: 100vh;
+  min-height: 640px;
+  max-width: 400px;
+  min-width: 400px;
+  @apply bg-white rounded-xl shadow;
+}
+
+.gh-card {
+  display: grid;
+  grid-template-rows: 1.5fr 1fr 1fr 6fr;
+}
