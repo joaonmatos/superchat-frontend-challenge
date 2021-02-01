@@ -8,5 +8,5 @@
 
 .gh-card {
   display: grid;
-  grid-template-rows: 1.5fr 1fr 1fr 6fr;
+  grid-template-rows: 1.5fr 1fr 1fr 6fr 1fr;
 }

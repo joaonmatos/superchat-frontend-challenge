@@ -1,5 +1,6 @@
 import { Repository } from "../interfaces";
 import styles from "../styles/Card.module.css";
+import Link from "next/link";
 
 export default function GitHubCard(props: { repository: Repository }) {
   const { name, owner, stars, topContributors } = props.repository;
@@ -29,7 +30,10 @@ export default function GitHubCard(props: { repository: Repository }) {
           Stars:<span className="ml-2 text-blue-600 text-lg">{stars}</span>
         </span>
 
-        <button className="border flex py-2 px-2 w-20 items-center rounded-md justify-around">
+        <a
+          href={repoUrl}
+          className="border flex py-2 px-2 w-20 items-center rounded-md justify-around"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -47,20 +51,30 @@ export default function GitHubCard(props: { repository: Repository }) {
             />
           </svg>
           Star
-        </button>
+        </a>
       </p>
       <div className="px-10 flex flex-col justify-start">
         <h2 className="mt-4 mb-2 text-2xl text-gray-500 text-center">
           Top Contributors
         </h2>
-        <ol>
-          {topContributors.map((contributor, i) => (
-            <li key={i} className="my-2">
-              <a href={`https://github.com/${contributor}`}>{contributor}</a>
-            </li>
-          ))}
-        </ol>
+        {topContributors != null ? (
+          <ol>
+            {topContributors.map((contributor, i) => (
+              <li key={i} className="my-2">
+                <a href={`https://github.com/${contributor}`}>{contributor}</a>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
+      <p className="text-center mt-2">
+        Created with{" "}
+        <Link href="/">
+          <a className="italic text-gray-400">Cardy GH</a>
+        </Link>
+      </p>
     </div>
   );
 }

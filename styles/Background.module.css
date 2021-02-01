@@ -1,0 +1,7 @@
+.bg-layout {
+  @apply w-screen h-screen flex items-center justify-center;
+}
+
+.bg-default {
+  @apply bg-gradient-to-r from-green-400 to-blue-500;
+}
