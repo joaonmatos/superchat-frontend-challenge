@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cardy GH
 
-## Getting Started
+Cardy GH is a small app that generates preview cards on the fly for your
+favourite GitHub repositories.
 
-First, run the development server:
+Just insert the owner's username and the repository name, and select a theme
+color, and get a short link for your card, ready for you to share on your
+socials.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Some Screenshots
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ * You see this page when you enter the website:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![Index page with card creation form](docs/screenshot-form.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+ * When you visit a card using its shortlink:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![Card page for an example repo (Kubernetes)](docs/screenshot-card.png)
 
-## Learn More
+## How did you create this app?
 
-To learn more about Next.js, take a look at the following resources:
+This app is created using NextJS and TypeScript.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For the frontend, I am using TailwindCSS and CSS Modules.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For the backend, I am using PostgreSQL to store the links and Octokit to access
+the GitHub API.
 
-## Deploy on Vercel
+The app is currently hosted on Vercel and the database is hosted on Heroku.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Why did you create this app?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I was challenged to do so by the awesome folks at
+[SuperChat](https://www.superchat.de/). It was fun to get to take a bunch of
+technologies I had not used, particularly on the frontend, and bang my head
+against the wall to make things happen.
+
+## How can I run it?
+
+ 1. Stand up your PostgreSQL database
+ 2. Use the file at /resources/db/schema.sql to set the db schema
+ 3. Set the DATABASE_URL environmental variable to the connection string for the
+    server
+ 4. Build with `npm run build`
+ 5. Start with `npm run start`
+
