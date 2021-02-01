@@ -42,17 +42,14 @@ export async function getRepoContributors(
   repo: string
 ): Promise<string[]> {
   const octokit = new Octokit();
+  try {
+    const request = await octokit.repos.getContributorsStats({ owner, repo });
 
-  const request = await octokit.repos.getContributorsStats({ owner, repo });
-
-  // if GitHub does not have these data cached, it will return status 202
-  // and we are supposed to retry later
-  if (request.status == 202) {
+    return request.data
+      .sort((a, b) => b.total - a.total)
+      .map((contribution) => contribution.author.login)
+      .slice(0, 10);
+  } catch (e) {
     return null;
   }
-
-  return request.data
-    .sort((a, b) => b.total - a.total)
-    .map((contribution) => contribution.author.login)
-    .slice(0, 10);
 }
