@@ -8,12 +8,19 @@ async function process(
   repo: string,
   color: string
 ): Promise<string> {
-  const id = nanoid(10);
-  const res = await db.query(
-    "INSERT INTO cards(shortcode, owner, repo, color) VALUES($1, $2, $3, $4) RETURNING *",
-    [id, owner, repo, color]
-  );
-  return res.rows[0].shortcode;
+  try {
+    const id = nanoid(10);
+    console.log(`Creating ${color} shortlink ${id} for ${owner}/${repo}`);
+    const res = await db.query(
+      "INSERT INTO cards(shortcode, owner, repo, color) VALUES($1, $2, $3, $4) RETURNING *",
+      [id, owner, repo, color]
+    );
+    console.log(`Result of INSERT query: ${res}`);
+    return res.rows[0].shortcode;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 }
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
