@@ -40,7 +40,7 @@ export default function RepoPage({ repository, color, err }: RepoPageProps) {
   const { name, owner } = repository;
   const [contributors, setContributors] = useState(null);
 
-  if (contributors === null) {
+  if (contributors === null && process.browser) {
     (async () => {
       let req = await fetch(`/api/contributors/${owner.id}/${name}`);
       while (req.status != 200) {
