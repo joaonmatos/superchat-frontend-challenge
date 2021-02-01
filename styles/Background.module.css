@@ -5,3 +5,15 @@
 .bg-default {
   @apply bg-gradient-to-r from-green-400 to-blue-500;
 }
+
+.bg-green {
+  @apply bg-gradient-to-r from-yellow-400 to-green-600;
+}
+
+.bg-blue {
+  @apply bg-gradient-to-r from-green-400 to-blue-500;
+}
+
+.bg-red {
+  @apply bg-gradient-to-r from-yellow-400 to-red-700;
+}
