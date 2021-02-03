@@ -23,7 +23,7 @@ async function process(
   }
 }
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
       const { owner, repo, color = "default" } = req.body || {};
@@ -39,19 +39,20 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         res.status(400).json("Invalid inputs.");
       }
       const octokit = new Octokit();
-      octokit.repos.get({ owner, repo }).then((apiCall) => {
-        switch (apiCall.status) {
-          case 200:
-            process(owner, repo, color)
-              .then((shorturl) => res.status(200).json(shorturl))
-              .catch(() => {
-                res.status(404).json("Repository not found.");
-              });
-            break;
-          default:
-            res.status(404).json("Repository not found.");
-        }
-      });
+      try {
+        // check if the repository exists.
+        // if the GitHub API returns anything other than 200,
+        // this call will throw an error
+        const _ = await octokit.repos.get({ owner, repo });
+        const shorturl = await process(owner, repo, color);
+        res.status(200).json(shorturl);
+      } catch (e) {
+        res
+          .status(404)
+          .json(
+            "Repository not found. Please make sure you submit an existing GitHub public repository"
+          );
+      }
     } catch (e) {
       res.status(500).json(e);
     }
