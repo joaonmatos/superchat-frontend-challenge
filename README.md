@@ -41,6 +41,7 @@ against the wall to make things happen.
  2. Use the file at /resources/db/schema.sql to set the db schema
  3. Set the DATABASE_URL environmental variable to the connection string for the
     server
- 4. Build with `npm run build`
- 5. Start with `npm run start`
+ 4. Set the CANONICAL_ROOT environmental variable to the servers domain
+ 5. Build with `npm run build`
+ 6. Start with `npm run start`
 
