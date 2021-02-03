@@ -28,13 +28,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       repository,
       color,
+      shortcode,
+      rootUrl: process.env.CANONICAL_ROOT,
     },
   };
 };
 
-type RepoPageProps = { repository: Repository; color: string; err: number };
+type RepoPageProps = {
+  repository: Repository;
+  color: string;
+  err: number;
+  shortcode: string;
+  rootUrl: string;
+};
 
-export default function RepoPage({ repository, color, err }: RepoPageProps) {
+export default function RepoPage({
+  repository,
+  color,
+  err,
+  shortcode,
+  rootUrl,
+}: RepoPageProps) {
   if (err) {
     return <ErrorPage statusCode={err} />;
   }
@@ -56,8 +70,17 @@ export default function RepoPage({ repository, color, err }: RepoPageProps) {
     <div className={bg["bg-layout"] + " " + bg["bg-" + color]}>
       <Head>
         <title>
-          {owner.id}/{name} / Cardy GH
+          {owner.id}/{name} - Cardy GH
         </title>
+        <meta property="og:title" content={`${owner.id}/${name}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://${rootUrl}/s/${shortcode}`} />
+        <meta property="og:image" content={`https://${rootUrl}/og-thumb.png`} />
+        <meta
+          property="og:description"
+          content={`Preview ${owner.id}/${name} on Cardy GH`}
+        />
+        <meta property="og:site_name" content="Cardy GH" />
       </Head>
       <GitHubCard
         repository={{
