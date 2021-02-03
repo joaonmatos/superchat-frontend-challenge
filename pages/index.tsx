@@ -3,8 +3,17 @@ import bg from "../styles/Background.module.css";
 import card from "../styles/Card.module.css";
 import { useState } from "react";
 import Link from "next/link";
+import { GetStaticProps } from "next";
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      rootUrl: process.env.CANONICAL_ROOT,
+    },
+  };
+};
+
+export default function Home({ rootUrl }) {
   const [owner, setOwner] = useState("");
   const [repo, setRepo] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -37,7 +46,13 @@ export default function Home() {
   return (
     <div className={`${bg["bg-layout"]} ${bg["bg-" + color]}`}>
       <Head>
-        <title>Home Page / Cardy GH</title>
+        <title>Home Page - Cardy GH</title>
+        <meta property="og:title" content="Home Page" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://${rootUrl}/`} />
+        <meta property="og:image" content={`https://${rootUrl}/og-thumb.png`} />
+        <meta property="og:description" content="Home page for Cardy GH" />
+        <meta property="og:site_name" content="Cardy GH" />
       </Head>
       <div
         className={`${card.card} flex flex-col justify-start items-center py-4`}
