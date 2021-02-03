@@ -1,5 +1,5 @@
 .bg-layout {
-  @apply w-screen h-screen flex items-center justify-center;
+  @apply w-screen min-h-screen flex items-center justify-center;
 }
 
 .bg-default {

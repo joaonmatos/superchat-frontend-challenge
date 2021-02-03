@@ -1,9 +1,8 @@
 .card {
-  max-height: 100vh;
   min-height: 640px;
   max-width: 400px;
   min-width: 400px;
-  @apply bg-white sm:rounded-xl shadow;
+  @apply bg-white sm:rounded-xl shadow my-8;
 }
 
 .gh-card {
