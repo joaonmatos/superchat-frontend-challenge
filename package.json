@@ -20,7 +20,7 @@
     "@octokit/rest": "18.5.2",
     "@types/pg": "7.14.9",
     "autoprefixer": "10.2.4",
-    "nanoid": "3.1.20",
+    "nanoid": "3.1.22",
     "next": "10.1.2",
     "pg": "8.5.1",
     "postcss": "8.2.4",
