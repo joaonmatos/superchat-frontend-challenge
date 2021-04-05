@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@octokit/rest": "18.5.2",
-    "@types/pg": "7.14.9",
+    "@types/pg": "7.14.11",
     "autoprefixer": "10.2.4",
     "nanoid": "3.1.22",
     "next": "10.1.3",
