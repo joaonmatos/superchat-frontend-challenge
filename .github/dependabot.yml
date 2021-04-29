@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "12:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.39
+    - 15.0.0
+  - dependency-name: postcss
+    versions:
+    - 8.2.12
+  - dependency-name: tailwindcss
+    versions:
+    - 2.0.4
+  - dependency-name: elliptic
+    versions:
+    - 6.5.4
