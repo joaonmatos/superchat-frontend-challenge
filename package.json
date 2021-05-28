@@ -17,7 +17,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@octokit/rest": "18.5.3",
+    "@octokit/rest": "18.5.4",
     "@types/pg": "8.6.0",
     "autoprefixer": "10.2.6",
     "nanoid": "3.1.23",
