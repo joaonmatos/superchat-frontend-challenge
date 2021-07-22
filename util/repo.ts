@@ -44,11 +44,12 @@ export async function getRepoContributors(
   const octokit = new Octokit();
   try {
     const request = await octokit.repos.getContributorsStats({ owner, repo });
-
-    return request.data
-      .sort((a, b) => b.total - a.total)
-      .map((contribution) => contribution.author.login)
-      .slice(0, 10);
+    if (request.status == 200) {
+      return request.data
+        .sort((a, b) => b.total - a.total)
+        .map((contribution) => contribution.author.login)
+        .slice(0, 10);
+    } else return null;
   } catch (e) {
     return null;
   }
