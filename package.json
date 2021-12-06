@@ -20,7 +20,7 @@
     "@octokit/rest": "18.12.0",
     "autoprefixer": "10.4.0",
     "nanoid": "3.1.30",
-    "next": "12.0.4",
+    "next": "12.0.7",
     "pg": "8.7.1",
     "postcss": "8.4.4",
     "react": "17.0.2",
